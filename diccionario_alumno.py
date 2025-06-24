@@ -1,11 +1,18 @@
 
+def mostrar_datos(cadena):
+    for valor in Datos:
+        if valor == cadena:
+            return Datos[valor]
 
+
+
+       
+   
+    
 
 Datos = {  
 
-    "Alumnos": ["alumno1","alumno2","alumno3"],
-    
-    1 : {
+    "Camila": {
         "Nombre" : "Camila",
         "Apellido" : "Fernandez",
         "DNI"   : 44333556,
@@ -16,7 +23,7 @@ Datos = {
         "Amonestaciones" : "Ninguna"
     },
     
-    2 : {
+    "Manuel" : {
         "Nombre" : "Manuel",
         "Apellido" : "Molina",
         "DNI"   : 44994335,
@@ -27,10 +34,10 @@ Datos = {
         "Amonestaciones" : "Ninguna",
     },
 
-    3 : {
+    "Luisana" : {
         "Nombre" : "Luisana",
         "Apellido" : "Sabedra",
-        "DNI"   : "44322333",
+        "DNI"   : 44322333,
         "Fecha-Nacimiento": "18/10/2017",
         "Tutor" : "Fransico Fernandez",
         "Notas" : {"Matematica": 10, "Lengua":5, "Artistica":7},
@@ -42,9 +49,24 @@ Datos = {
 
       }
 
+while True:
+    opcion = input("ESCUELA Nº 5032\n1.Datos de Alumnos\n2.Modificar datos de Alumnos\n3.Agregar Alumno\n4.Expulsar Alumno" \
+                    "\n5.Salir\n-->: ")
+    if opcion == '1':
+        nombre = input("Ingrese Nombre del Alumno: ")
+        resul = mostrar_datos(nombre)
+        print(resul)
+    elif opcion == '2':
+        nombre = input("Ingrese Nombre del Alumno: ")
+        editar = input("<Seleccione>\n1.Nombre\n2.Apellido\n3.DNI\n4.Fecha de Nacimiento\n5.tutor\n6.Notas\n7.Faltas" \
+                        "\n8.Amonestaciones\n-->: ")
+                       
+                       
+                       
 
-for clave in Datos:
-    print(Datos["Alumnos"][2]["DNI"])
+
+        
+
     
             
         
