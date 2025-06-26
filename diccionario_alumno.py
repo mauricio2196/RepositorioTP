@@ -1,49 +1,70 @@
 
 def mostrar_datos(dni):
     doc=str(dni)
-    if doc in Datos:
-        print(Datos[doc])
+    if doc in alumnos:
+        print(alumnos[doc])
+    else:
+        print("No Existe el Alumnno")
    
     
 
 def modificar_datos(dni,indice,valor,i=None):
     from datetime import datetime
 
-    doc=str(dni)
+    doc = str(dni)
     claves = ["Nombre","Apellido","DNI","Fecha-Nacimiento","Tutor","Notas","Faltas","Amonestaciones"]
     materias = ["Matematica","Lengua","Artistica"]
    
-    if doc in Datos:
+    if doc in alumnos:
         indice-= 1
         clave = claves[indice]
+        
         if clave == "Notas":
             i-=1
             if i is not None:
                 nota = materias[i]
-                Datos[doc]["Notas"][nota] = valor
-                print(f"{nota}:{valor}")     
+                alumnos[doc]["Notas"][nota] = valor
+                print(f"{nota}:{valor}")
+
         elif clave == "DNI":
             doc_nuevo = str(valor)
-            Datos[doc_nuevo] = Datos[doc]
-            Datos[doc_nuevo]["DNI"] = int(valor)
-            del Datos[doc]
+            alumnos[doc_nuevo] = alumnos[doc]
+            alumnos[doc_nuevo]["DNI"] = int(valor)
+            del alumnos[doc]
             print(f"{clave}:{valor}")
+        
         elif clave == "Fecha-Nacimiento":
             datetime.strptime(valor,"%d-%m-%Y")
-            Datos[doc][clave] = valor
+            alumnos[doc][clave] = valor
             print(f"{clave}:{valor}")
-        else:
-            Datos[doc][clave] = valor
-            print(f"{clave}:{valor}") 
+           
+    else:
+        alumnos[doc][clave] = valor
+        print(f"{clave}:{valor}") 
+
+    
+def agregar_alumno(diccionario, alumno_nuevo):
+    dni = str(alumno_nuevo["DNI"])
+    diccionario[dni] = alumno_nuevo
+    print(f"{dni} agregado correctamente")
+
+
+def eliminar_alumno(dni):
+    doc = str(dni)
+    if doc in alumnos:
+        del alumnos[doc]
+        print("Eliminado con Exito")
+    else:
+        print("No existe ese Documento")
+
 
      
 
        
 
-
-Datos = {
+alumnos = {
   
-    "4433556":{
+    "44335562":{
         "Nombre" : "Camila",
         "Apellido" : "Fernandez",
         "DNI"   : 44333556,
@@ -80,9 +101,8 @@ Datos = {
     }
 
 
+
  
-
-
 
 while True:
     opcion = input("ESCUELA Nº 5032\n1.Datos de Alumnos\n2.Modificar datos de Alumnos\n3.Agregar Alumno\n4.Expulsar Alumno" \
@@ -101,10 +121,37 @@ while True:
         else:
             editar = input("Ingrese lo Nuevo: ")
             modificar_datos(dni,mod,editar)
+    elif opcion == '3':
+        dni = int(input("Ingrese DNI: "))
+        nombre = input("Ingrese el Nombre: ")
+        apellido = input("Ingrese Apellido: ")
+        f_nac = input("Ingrese la fecha (d-m-a): ")
+        tutor = input("Ingrese Nombre Completo: ")
+        mate = input("Nota Matematica: ")
+        leng = input("Nota Lengua: ")
+        art = input("Nota Artistica: ")
+        falta = input("Ingrese Faltas: ")
+        amon = input("Ingrese Amonestaciones: ")
         
-        
-       
 
+   
+
+        alumno_nuevo = {
+        "Nombre" : nombre,
+        "Apellido" : apellido,
+        "DNI"   : dni,
+        "Fecha-Nacimiento" : f_nac,
+        "Tutor" : tutor,
+        "Notas" : {"Matematica":mate,"Lengua":leng,"Artistica":art},
+        "Faltas" : falta,
+        "Amonestaciones" : amon,
+        }
+
+        agregar_alumno(alumnos,alumno_nuevo)
+    
+    elif opcion == '4':
+        dni = int(input("Ingrese DNI Alumno: "))
+        eliminar_alumno(dni)
                        
                        
                        
