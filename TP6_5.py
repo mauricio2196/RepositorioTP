@@ -1,3 +1,43 @@
+def guardar_archivo(archivo_datos):
+    if not os.path.exists(archivo_datos):
+        with open(archivo_datos, "w") as archivo:
+            for dni, datos in alumnos.items():
+                linea = (f"{dni}:{datos}\n")
+                archivo.write(linea)
+
+    else:
+        with open(archivo_datos, "a") as archivo:
+         for dni, datos in alumnos.items():
+                linea = (f"{dni}:{datos}\n")
+                archivo.write(linea)
+   
+                    
+"""
+def editar_archivo(archivo_datos):
+    mod_archivo = {}
+    with open(archivo_datos, "r") as archivo:
+        for linea in archivo:
+            lineas = linea.split()
+            if len(lineas) == 9:
+                dni,nombre,apellido,dni,f_nac,tutor,nota,faltas,amon = lineas
+                mat,leng,art = nota.split()
+                mod_archivo[dni] = {
+                        "Nombre": nombre,
+                        "Apellido": apellido,
+                        "DNI": dni,
+                        "Fecha-Nacimiento": f_nac,
+                        "Tutor": tutor,
+                        "Notas": {
+                            "Matematica": mat,
+                            "Lengua": leng,
+                            "Artistica": art
+                            },
+                        "Faltas": faltas,
+                        "Amonestaciones": amon
+                     }
+"""    
+             
+
 
 def mostrar_datos(dni):
     doc=str(dni)
@@ -36,6 +76,8 @@ def modificar_datos(dni,indice,valor,i=None):
             alumnos[doc][clave] = valor
             print(f"{clave}:{valor}") 
 
+       
+
 
 
     
@@ -43,6 +85,7 @@ def agregar_alumno(datos, alumno_nuevo):
     dni = str(alumno_nuevo["DNI"])
     datos[dni] = alumno_nuevo
     print(f"DNI{dni} Se Agrego Correctamente")
+   
 
 
 def eliminar_alumno(dni):
@@ -51,12 +94,10 @@ def eliminar_alumno(dni):
         del alumnos[doc]
         print("Eliminado con Exito")
     else:
-        print("No existe el Documento")
-
-
-     
-
+        print("No existe el Documento")   
        
+            
+
 
 alumnos = {
   
@@ -96,6 +137,9 @@ alumnos = {
 
     }
 
+import os
+
+archivo_datos = (r"C:\Users\Mauricio\Downloads\ml\Curso de Python\git-repositorio\archivo_practica\alumnos.txt")
 
 
 while True:
@@ -104,6 +148,7 @@ while True:
     if opcion == '1':
         dni = int(input("Ingrese DNI: "))
         mostrar_datos(dni)
+        
         
     elif opcion == '2':
         dni = int(input("Ingrese DNI: "))
@@ -116,8 +161,8 @@ while True:
         else:
             editar = input("Ingrese lo Nuevo: ")
             modificar_datos(dni,mod,editar)
+            
 
-        
     elif opcion == '3':
         dni = int(input("Ingrese DNI: "))
         nombre = input("Ingrese el Nombre: ")
@@ -150,17 +195,7 @@ while True:
         eliminar_alumno(dni)
     
     elif opcion == '5':
+        guardar_archivo(archivo_datos)
         print("Fin de Programa")
         break
-                       
-                       
-                       
-
-
-        
-
-    
-            
-        
-   
-
+                   
